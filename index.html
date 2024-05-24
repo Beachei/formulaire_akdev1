@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://js.stripe.com/v3/"></script>
+    <link rel="stylesheet" href="bootstrap.css">
+</head>
+<body>
+    <form action="app.php" method="post" id="form">
+        <input type="text" name="nom" id="nom" placeholder="Nom">
+        <input type="text" name="prenom" id="prenom" placeholder="Prénom">
+        <input type="date" name="dateArrive" id="date">
+        <input type="date" name="dateDepart" id="date">
+
+        <div class="d-flex align-items-end">
+            <label for="selection" class="fw-bold col-3">Logement</label>
+            <select name="selection" id="selection" class="selection border-top-0 border-start-0 border-end-0">
+                <option value="1">BUNGALLOW SIMPLE</option>
+                <option value="2">BUNGALLOW FAMILIALE</option>
+                <option value="3">VILLA</option>
+            </select>
+        </div>
+        
+
+        <div class="text-center">
+            <h5 class="fw-bold">Activité sur reservation</h5>
+        </div>
+        <div class="d-flex">
+            <div class="d-block">
+                <label class="col-12" for="plongé">
+                    <input name="p" id="plongé" value="excursion avec plongée sous marine" type="checkbox">excursion avec plongée sous marine
+                </label>
+                <label class="col-12" for="plongé1">
+                    <input name="p1" id="plongé" value="baptême de plongée" type="checkbox">baptême de plongée
+                </label>
+                <label class="col-12" for="plongé2">
+                    <input name="p2" id="plongé" value="brevet de plongée" type="checkbox">brevet de plongée
+                </label>
+            </div>
+            <div class="d-block ">
+                <label class="col-12" for="plongé3">
+                    <input name="p3" id="plongé" value="excursion des baleines (juillet-septembre)" type="checkbox">excursion des baleines (juillet-septembre)
+                </label>
+                <label class="col-12" for="plongé4">
+                    <input name="p4" id="plongé" value="excursions en quad ou moto" type="checkbox">excursions en quad ou moto
+                </label>
+            </div>
+        </div>
+        <br>
+        <div style="display: flex;" class="align-items-center ">
+            <h4 class="fw-bold">Logement :</h4>
+            <h4 class="amount"></h4>
+            <h4>€</h4>
+        </div>
+        <hr>
+        <div style="display: flex;" class="align-items-center "> 
+            <h4 class="fw-bold">Activité :</h4>
+            <h4 class="amount1"></h4>
+            <h4>€</h4>
+        </div>
+        <hr>
+        <div style="display: flex;">
+            <h2 class="fw-bold">Total :</h2>
+            <h2 class="amount2" ></h2>
+            <h2>€</h2>
+        </div>
+
+
+        <input type="hidden" name="price" id="price" value="100.00">
+        <input type="hidden" name="priceActivities" id="priceA" value="100.00">
+        <div id="card-element"></div>
+
+        <button type="submit">Payer</button>
+    </form>
+    
+    <script src="app.js"></script>
+    <script src="price.js"></script>
+</body>
+</html>
