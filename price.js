@@ -117,11 +117,27 @@ document.addEventListener('DOMContentLoaded', function(){
 console.log()
 date.forEach(function(date){
     date.addEventListener('change', function(){
-        console.log('mety')
-        const dateArrive = new Date(date[0].value);
-        const dateDepart = new Date(date[1].value);
-        console.log(dateArrive)
-        console.log(dateDepart)
+        let date1 = new Date(document.querySelectorAll('.dateA').value);
+        switch(date.name){
+            case "dateArrive":
+                let dateA = new Date(date.value)
+                console.log(dateA.toDateString())
+                if(dateA < NowDate){
+                    date.value = NowYear.toString() + "-" + NowMonth.toString().padStart('2',0) + "-" + NowDay.toString().padStart('2',0);
+                    console.log(date)
+                    console.log(date1.toDateString())
+                }
+                break
+            case "dateDepart":
+                let dateD = new Date(date.value)
+                console.log(dateD.toDateString())
+                if(dateD <= date1.value){
+                    date.value = NowYear.toString() + "-" + NowMonth.toString().padStart('2',0) + "-" + NowDay.toString().padStart('2',0);
+                    console.log(date)
+                    console.log(dateA)
+                }
+                break
+        }
     })
 })
 form.addEventListener('change', function(){
