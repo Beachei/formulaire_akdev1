@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function(){
     let NowYear = NowDate.getFullYear();
     let NowMonth = NowDate.getMonth() + 1;
     let NowDay = NowDate.getDate();
+    let NowDayD = NowDate.getDate() + 1;
 
     /* let prix = document.createElement('input');
     prix.setAttribute('type', "hidden")
@@ -115,26 +116,37 @@ document.addEventListener('DOMContentLoaded', function(){
         })
     })
 console.log()
-date.forEach(function(date){
+date.forEach(function(date){   
     date.addEventListener('change', function(){
-        let date1 = new Date(document.querySelectorAll('.dateA').value);
+        let date1 =  document.querySelector('.dateA');
+        setTimeout(function(){console.log(date1.value)},100)
         switch(date.name){
             case "dateArrive":
                 let dateA = new Date(date.value)
                 console.log(dateA.toDateString())
                 if(dateA < NowDate){
                     date.value = NowYear.toString() + "-" + NowMonth.toString().padStart('2',0) + "-" + NowDay.toString().padStart('2',0);
-                    console.log(date)
-                    console.log(date1.toDateString())
+                    console.log(dateA.toDateString())
                 }
                 break
             case "dateDepart":
-                let dateD = new Date(date.value)
-                console.log(dateD.toDateString())
-                if(dateD <= date1.value){
-                    date.value = NowYear.toString() + "-" + NowMonth.toString().padStart('2',0) + "-" + NowDay.toString().padStart('2',0);
-                    console.log(date)
-                    console.log(dateA)
+                let dateD = new Date(date.value);
+                let dateDmonth = dateD.getMonth() +1;
+                let dateDday = dateD.getMonth();
+                let dateForm = dateD.getFullYear().toString() + "-" + dateDmonth.toString().padStart('2',0) + "-" + dateDday.toString().padStart('2',0) ;
+                setTimeout(function(){console.log(date.value)},100)
+                console.log("date Form" + dateForm)
+
+                /* if(dateD <= NowDate){
+                    date.value = NowYear.toString() + "-" + NowMonth.toString().padStart('2',0) + "-" + NowDayD.toString().padStart('2',0);
+                    console.log(date1.value)
+                }else  */if(date.value <= date1.value || dateD <= NowDate){
+                    date.value = date1.value;
+                    setTimeout(function(){
+                        let dateChange = new Date(date.value) 
+                        dateChange.setDate(dateChange.getDate() + 1)
+                        date.value = dateChange.toISOString().substr(0,10);
+                    },100)
                 }
                 break
         }

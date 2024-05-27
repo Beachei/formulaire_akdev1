@@ -11,6 +11,8 @@ if(isset($_POST['price'],$_POST['tokenID'],$_POST['nom'],$_POST['prenom'],$_POST
     $complet = $nom . ' ' . $prenom;
     $amount = $amount*100;
     $amount1 = $amount1*100;
+    $arrive = isset($_POST['dateArrive'])? $_POST['dateArrive'] : "";
+    $depart = isset($_POST['dateDepart'])? $_POST['dateDepart'] : "";
     $activite = isset($_POST['p']) ? "-".$_POST['p'] : '';
     $activite1 = isset($_POST['p1']) ? "-".$_POST['p1'] : '';
     $activite2 = isset($_POST['p2']) ? "-".$_POST['p2'] : '';
@@ -35,6 +37,8 @@ if(isset($_POST['price'],$_POST['tokenID'],$_POST['nom'],$_POST['prenom'],$_POST
         $activite2,
         $activite3,
         $activite4,
+        "Date d'arrivé" => $arrive,
+        "Date de départ" => $depart,
     ];
 
     $customer = $stripe->customers->create([
