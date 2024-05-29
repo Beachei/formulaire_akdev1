@@ -129,6 +129,7 @@ document.addEventListener('DOMContentLoaded', function(){
                             } */
                             do{
                                 i++
+                                nombreEnfant.value = i
                             }while(i < 4)
                             break
                     }
