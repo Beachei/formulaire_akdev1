@@ -11,27 +11,56 @@
     <form action="app.php" method="post" id="form">
         <input type="text" name="nom" id="nom" placeholder="Nom">
         <input type="text" name="prenom" id="prenom" placeholder="Prénom">
-        <input type="date" name="dateArrive" class="dateA" id="date">
-        <input type="date" name="dateDepart" id="date">
+        <br>
+        <div>
+            <div class="d-flex align-items-center mb-1">
+                <p class="mb-0 fw-bold">Nombre d'adulte : </p>
+                <input class="ms-1" type="text" id="nbrA" style="width: 4%;height: 3%;" value="">
+                <div class="d-flex ms-2">
+                    <button class="down1" type="button">🔽</button>
+                    <button class="ms-1 up1" type="button">🔼</button>
+                </div>
+            </div>
+            <div class="d-flex align-items-center">
+                <p class="mb-0 fw-bold">Nombre d'enfant : </p>
+                <input class="ms-1" type="text" id="nbrE" style="width: 4%;height: 3%;" value="">
+                <div class="d-flex ms-2">
+                    <button class="down" type="button">🔽</button>
+                    <button class="ms-1 up" type="button">🔼</button>
+                </div>
+            </div>
+        </div>
+    
+
 
         <div class="d-flex align-items-end">
-            <label for="selection" class="fw-bold col-3">Logement</label>
+            <label for="selection" class="fw-bold col-3">Logement :</label>
             <select name="selection" id="selection" class="selection border-top-0 border-start-0 border-end-0">
                 <option value="1">BUNGALLOW SIMPLE</option>
                 <option value="2">BUNGALLOW FAMILIALE</option>
                 <option value="3">VILLA</option>
             </select>
         </div>
+        <br>
+        <div>
+            <label class="col-2" for="date">Date d'arrivé :</label>
+            <input type="date" name="dateArrive" class="dateA" id="date">
+            <br>
+            <label class="col-2" for="date">Date de départ :</label>
+            <input type="date" name="dateDepart" class="dateD" id="date">
+            <br>
+            <div class="d-flex">
+                <label class="fw-bold col-2" for="pass">Nuits :</label>
+                <h5 class="col-3" id="passNight" name="dure" value=""></h5>
+            </div>
+        </div>
         
 
         <div class="text-center">
-            <h5 class="fw-bold">Activité sur reservation</h5>
+            <h5 class="fw-bold">Activité sur reservation :</h5>
         </div>
         <div class="d-flex">
             <div class="d-block">
-                <label class="col-12" for="plongé">
-                    <input name="p" id="plongé" value="excursion avec plongée sous marine" type="checkbox">excursion avec plongée sous marine
-                </label>
                 <label class="col-12" for="plongé1">
                     <input name="p1" id="plongé" value="baptême de plongée" type="checkbox">baptême de plongée
                 </label>
@@ -45,6 +74,9 @@
                 </label>
                 <label class="col-12" for="plongé4">
                     <input name="p4" id="plongé" value="excursions en quad ou moto" type="checkbox">excursions en quad ou moto
+                </label>
+                <label class="col-12" for="plongé">
+                    <input name="p" id="plongé" value="excursion avec plongée sous marine" type="checkbox">excursion avec plongée sous marine
                 </label>
             </div>
         </div>
@@ -70,6 +102,7 @@
 
         <input type="hidden" name="price" id="price" value="100.00">
         <input type="hidden" name="priceActivities" id="priceA" value="100.00">
+        <input type="hidden" name="dure" id="dure" value="100.00">
         <div id="card-element"></div>
 
         <button type="submit">Payer</button>
