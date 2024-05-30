@@ -98,98 +98,79 @@ document.addEventListener('DOMContentLoaded', function(){
                     console.log(nombreEnfant.value)
                     switch(Sn){
                         case 50:
-                            nombreEnfant.value = 0
-                            if(i == 2){
-                                console.log("nombre d'enfant :" + i)
-                                nombreEnfant.value = 2;
-                            }
-                            else{
-                                i++
-                                nombreEnfant.value = i;
-                            }
-                            break
-                        case 100:
-                            nombreEnfant.value = 0
-                            console.log("nombre d'enfant :" + Sn)
-                            if(i == 3){
-                                nombreEnfant.value = 3
-                            }else{
-                                i++
-                                nombreEnfant.value = i;
-                            }
-                            break
-                        case 150:
-                            nombreEnfant.value = 0
-                            console.log("nombre d'enfant :" + Sn)
-                            /* if(i == 4){
-                                nombreEnfant.value = 4
-                            }else{
-                                i++
-                                nombreEnfant.value = i;
-                            } */
-                            do{
-                                i++
-                                nombreEnfant.value = i
-                            }while(i < 4)
-                            break
+                                if (i < 2) {
+                                    i++;
+                                } else {
+                                    i = 2;
+                                }
+                                break;
+                            case 100:
+                                if (i < 3) {
+                                    i++;
+                                } else {
+                                    i = 3;
+                                }
+                                break;
+                            case 150:
+                                if (i < 4) {
+                                    i++;
+                                } else {
+                                    i = 4;
+                                }
+                                break;
                     }
+                    nombreEnfant.value = i;
+                        console.log(`nombre d'enfant : ${i}`);
                     })
 
         down.addEventListener('click',function(){
-            if(nombreEnfant.value == 0){
-                nombreEnfant.value =0
-            }else{
-            nombreEnfant.value--;
+            if (i > 0) {
+                i--;
+            } else {
+                i = 0;
             }
+            nombreEnfant.value = i;
         })
     }
     function btnUD1(Sn1){
                 let i = 0 ;
-                up1.addEventListener('click',function (){
-                    console.log(nombreAdulte.value)
-                    switch(Sn1){
-                        case 50:
-                            nombreAdulte.value = 0
-                            if(i == 2){
-                                console.log("nombre d'enfant :" + i)
-                                nombreAdulte.value = 2;
-                            }
-                            else{
-                                i++
-                                nombreAdulte.value = i;
-                            }
-                            break
-                        case 100:
-                            nombreAdulte.value = 0
-                            console.log("nombre d'enfant :" + Sn1)
-                            if(i == 3){
-                                nombreAdulte.value = 3
-                            }else{
-                                i++
-                                console.log(i)
-                                nombreAdulte.value = i;
-                            }
-                            break
-                        case 150:
-                            nombreAdulte.value = 0
-                            console.log("nombre d'enfant :" + Sn1)
-                            if(i == 4){
-                                nombreAdulte.value = 4
-                            }else{
-                                i++
-                                console.log(i)
-                                nombreAdulte.value = i;
-                            }
-                            break
-                    }
+                    up1.addEventListener('click', function () {
+                        switch (Sn1) {
+                            case 50:
+                                if (i < 2) {
+                                    i++;
+                                } else {
+                                    i = 2;
+                                }
+                                break;
+                            case 100:
+                                if (i < 3) {
+                                    i++;
+                                } else {
+                                    i = 3;
+                                }
+                                break;
+                            case 150:
+                                if (i < 4) {
+                                    i++;
+                                } else {
+                                    i = 4;
+                                }
+                                break;
+                        }
+                        nombreAdulte.value = i;
+                        console.log(`nombre d'enfant : ${i}`);
                     })
 
         down1.addEventListener('click',function(){
-            if(nombreEnfant.value == 0){
-                nombreEnfant.value =0
-            }else{
-            nombreEnfant.value--;
+            if (i > 0) {
+                i--;
+            } else {
+                i = 0;
             }
+            nombreAdulte.value = i;
+            
+            console.log('affiche le i de i-- :' + i)
         })
     }
 
