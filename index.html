@@ -9,8 +9,19 @@
 </head>
 <body>
     <form action="app.php" method="post" id="form">
-        <input type="text" name="nom" id="nom" placeholder="Nom">
-        <input type="text" name="prenom" id="prenom" placeholder="Prénom">
+        <div class="d-flex">
+            <input type="text" name="nom" id="nom" placeholder="Nom">
+            <input type="text" name="prenom" id="prenom" class="ms-1" placeholder="Prénom">
+        </div>
+        <br>
+        <div class="d-flex align-items-end">
+            <label for="selection" class="fw-bold col-3">Traitement :</label>
+            <select name="selection" id="selection" class="selection border-top-0 border-start-0 border-end-0">
+                <option value="1">BED & BREAKFAST</option>
+                <option value="2">DEMI PENSION</option>
+                <option value="3">PENSION COMPLET</option>
+            </select>
+        </div>
         <br>
         <div>
             <div class="d-flex align-items-center mb-1">
@@ -28,19 +39,13 @@
                     <button class="down" type="button">🔽</button>
                     <button class="ms-1 up" type="button">🔼</button>
                 </div>
+                <p class="ms-2 mb-0">6 - 12 ans (50%)</p>
             </div>
         </div>
     
 
 
-        <div class="d-flex align-items-end">
-            <label for="selection" class="fw-bold col-3">Logement :</label>
-            <select name="selection" id="selection" class="selection border-top-0 border-start-0 border-end-0">
-                <option value="1">BUNGALLOW SIMPLE</option>
-                <option value="2">BUNGALLOW FAMILIALE</option>
-                <option value="3">VILLA</option>
-            </select>
-        </div>
+        
         <br>
         <div>
             <label class="col-2" for="date">Date d'arrivé :</label>
@@ -82,15 +87,34 @@
         </div>
         <br>
         <div style="display: flex;" class="align-items-center ">
-            <h4 class="fw-bold">Logement :</h4>
-            <h4 class="amount"></h4>
-            <h4>€</h4>
+            <h5 class="fw-bold">Traitement :</h5>
+            <h5 class="amount"></h5>
+            <h5>€</h5>
+        </div>
+        <hr>
+        <br>
+        <div style="display: flex;" class="align-items-center ">
+            <h5 class="fw-bold mb-0">Adulte :</h5>
+            <h5 class="adulteAmount mb-0">0</h5>
+            <h5 class="mb-0">€</h5>
+        </div>
+        <br>
+        <div style="display: flex;" class="align-items-center ">
+            <h5 class="fw-bold mb-0">Enfant :</h5>
+            <h5 class="enfantAmount mb-0">0</h5>
+            <h5 class="mb-0">€</h5>
+        </div>
+        <br>
+        <div style="display: flex;">
+            <h5 class="fw-bold">Total :</h5>
+            <h5 class="amountAE" ></h5>
+            <h5 class="mb-0">€</h5>
         </div>
         <hr>
         <div style="display: flex;" class="align-items-center "> 
-            <h4 class="fw-bold">Activité :</h4>
-            <h4 class="amount1"></h4>
-            <h4>€</h4>
+            <h5 class="fw-bold">Activité :</h5>
+            <h5 class="amount1"></h5>
+            <h5>€</h5>
         </div>
         <hr>
         <div style="display: flex;">

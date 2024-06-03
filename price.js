@@ -10,10 +10,14 @@ document.addEventListener('DOMContentLoaded', function(){
     let up1 = document.querySelector('.up1');
     let amount = document.querySelector('.amount');
     let amountActivies = document.querySelector('.amount1');
+    let adulteAmount = document.querySelector('.adulteAmount');
+    let enfantAmount = document.querySelector('.enfantAmount');
     const form = document.getElementById('form');
     let Total = document.querySelector('.amount2');
+    let TotalAE = document.querySelector('.amountAE');
     let amountPrice = 0;
     let amountPriceA = 0;
+    let halthPrice = 0;
     const check = document.querySelectorAll('#plongé');
     const date = document.querySelectorAll('#date')
     let date1 =  document.querySelector('.dateA');
@@ -24,12 +28,6 @@ document.addEventListener('DOMContentLoaded', function(){
     let NowYear = NowDate.getFullYear();
     let NowMonth = NowDate.getMonth() + 1;
     let NowDay = NowDate.getDate();
-    let NowDayD = NowDate.getDate() + 1;
-
-    /* let prix = document.createElement('input');
-    prix.setAttribute('type', "hidden")
-    prix.setAttribute('name', "amount")
-    prix.setAttribute('value', amou) */
     
     selection.addEventListener('change', function(){
         console.log(selection)
@@ -43,7 +41,8 @@ document.addEventListener('DOMContentLoaded', function(){
             amount.innerHTML = 150;
             amountPrice = 150;
         }
-        console.log(amountPrice)
+        console.log(amountPrice);
+        halthPrice = (amountPrice * 50)/100;
          price.value = amountPrice;
          btnUD(amountPrice)
          btnUD1(amountPrice)
@@ -51,14 +50,23 @@ document.addEventListener('DOMContentLoaded', function(){
             case 50:
                 nombreEnfant.value = 0
                 nombreAdulte.value = 0
+                adulteAmount.innerHTML = 0
+                enfantAmount.innerHTML = 0
+                TotalAE.innerHTML = 0
                 break
             case 100:
                 nombreEnfant.value = 0
                 nombreAdulte.value = 0
+                adulteAmount.innerHTML = 0
+                enfantAmount.innerHTML = 0
+                TotalAE.innerHTML = 0
                 break
             case 150:
                 nombreEnfant.value = 0
                 nombreAdulte.value = 0
+                adulteAmount.innerHTML = 0
+                enfantAmount.innerHTML = 0
+                TotalAE.innerHTML = 0
                 break
          }
     })
@@ -76,6 +84,7 @@ document.addEventListener('DOMContentLoaded', function(){
     }
     price.value = amountPrice;
     console.log(amountPrice)
+    halthPrice = (amountPrice * 50)/100;
     switch(amountPrice){
         case 50:
             nombreEnfant.value = 0
@@ -93,7 +102,8 @@ document.addEventListener('DOMContentLoaded', function(){
     btnUD(amountPrice)
     btnUD1(amountPrice)
     function btnUD(Sn){
-                let i = 0 ;
+                let i = 0 ; 
+                let price1 =0;
                 up.addEventListener('click',function (){
                     console.log(nombreEnfant.value)
                     switch(Sn){
@@ -120,7 +130,12 @@ document.addEventListener('DOMContentLoaded', function(){
                                 break;
                     }
                     nombreEnfant.value = i;
+                    price1 = halthPrice * i;
+                    enfantAmount.innerHTML = price1;
+                    TotalAE.innerHTML = parseFloat(enfantAmount.textContent) + parseFloat(adulteAmount.textContent);
+                    Total.innerHTML = parseFloat(TotalAE.textContent) + amountPriceA;
                         console.log(`nombre d'enfant : ${i}`);
+                        console.log(`prix enfant` +  price1);
                     })
 
         down.addEventListener('click',function(){
@@ -128,12 +143,17 @@ document.addEventListener('DOMContentLoaded', function(){
                 i--;
             } else {
                 i = 0;
-            }
+            }            
+            price1 = halthPrice * i
+            enfantAmount.innerHTML = price1;
             nombreEnfant.value = i;
+            TotalAE.innerHTML = parseFloat(enfantAmount.textContent) + parseFloat(adulteAmount.textContent);
+            Total.innerHTML = parseFloat(TotalAE.textContent) + amountPriceA;
         })
     }
     function btnUD1(Sn1){
                 let i = 0 ;
+                let price2 = 0;
                     up1.addEventListener('click', function () {
                         switch (Sn1) {
                             case 50:
@@ -159,7 +179,12 @@ document.addEventListener('DOMContentLoaded', function(){
                                 break;
                         }
                         nombreAdulte.value = i;
-                        console.log(`nombre d'enfant : ${i}`);
+                        price2 = amountPrice * i;
+                        adulteAmount.innerHTML = price2;
+                        console.log(`nombre d'adulte : ${i}`);
+                        console.log(`prix adulte` +  price2);
+                        TotalAE.innerHTML = parseFloat(enfantAmount.textContent) + parseFloat(adulteAmount.textContent);
+                        Total.innerHTML = parseFloat(TotalAE.textContent) + amountPriceA;
                     })
 
         down1.addEventListener('click',function(){
@@ -169,10 +194,15 @@ document.addEventListener('DOMContentLoaded', function(){
                 i = 0;
             }
             nombreAdulte.value = i;
-            
+            price2 = amountPrice * i;
+            adulteAmount.innerHTML = price2;
             console.log('affiche le i de i-- :' + i)
+            TotalAE.innerHTML = parseFloat(enfantAmount.textContent) + parseFloat(adulteAmount.textContent);
+            Total.innerHTML = parseFloat(TotalAE.textContent) + amountPriceA;
         })
     }
+    
+
 
     if(date1.value == ""){
         date2.disabled = true;
@@ -180,8 +210,8 @@ document.addEventListener('DOMContentLoaded', function(){
         date2.disabled = false;
     }
     form.addEventListener('change', function(){
-        let a = amountPrice ;
-        let b = amountPriceA;
+        let a = amountPriceA ;
+        let b = parseFloat(TotalAE.textContent);
         let c = a+b;
         Total.innerHTML = c;
         if(date1.value == ""){
@@ -303,10 +333,6 @@ date.forEach(function(date){
         }
     })
 })
-let a = amountPrice ;
-    let b = amountPriceA;
-    let c = a+b;
-    Total.innerHTML = c;
 
     })
 
