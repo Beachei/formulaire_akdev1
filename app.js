@@ -27,4 +27,4 @@ function tokenCard(token){
 
     form.submit()
 }
-function r(){}
+

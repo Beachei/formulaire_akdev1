@@ -4,14 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://js.stripe.com/v3/"></script>  
+    <script src="https://www.paypal.com/sdk/js?client-id=Aa5xokGLrn08TxvMUpTcGRsYuEgWe7ekEt4o7DnFRUcC9U_9E3gXSaa81NoKBNhGyyewefe6IzUCT1Ca&components=buttons"></script>
     <link rel="stylesheet" href="bootstrap.css">
+    <script src="./jquery/jquery-3.7.1.min.js"></script>
 </head>
 <body>
     <form action="app.php" method="post" id="form">
         <div class="d-flex">
             <input type="text" name="nom" id="nom" placeholder="Nom">
             <input type="text" name="prenom" id="prenom" class="ms-1" placeholder="Prénom">
+            <input type="text" name="mail" id="mail" class="ms-1" placeholder="Mail">
         </div>
         <br>
         <div class="d-flex align-items-end">
@@ -26,18 +29,18 @@
         <div>
             <div class="d-flex align-items-center mb-1">
                 <p class="mb-0 fw-bold">Nombre d'adulte : </p>
-                <input class="ms-1" type="text" id="nbrA" style="width: 4%;height: 3%;" value="">
+                <input class="ms-1" type="text" name="nbrA" id="nbrA" style="width: 4%;height: 3%;">
                 <div class="d-flex ms-2">
-                    <button class="down1" type="button">🔽</button>
-                    <button class="ms-1 up1" type="button">🔼</button>
+                    <button  class="down1" type="button">🔽</button>
+                    <button  class="ms-1 up1" type="button">🔼</button>
                 </div>
             </div>
             <div class="d-flex align-items-center">
                 <p class="mb-0 fw-bold">Nombre d'enfant : </p>
-                <input class="ms-1" type="text" id="nbrE" style="width: 4%;height: 3%;" value="">
+                <input class="ms-1" type="text" name="nbrE" id="nbrE" style="width: 4%;height: 3%;">
                 <div class="d-flex ms-2">
-                    <button class="down" type="button">🔽</button>
-                    <button class="ms-1 up" type="button">🔼</button>
+                    <button  class="down" type="button">🔽</button>
+                    <button  class="ms-1 up" type="button">🔼</button>
                 </div>
                 <p class="ms-2 mb-0">6 - 12 ans (50%)</p>
             </div>
@@ -54,10 +57,7 @@
             <label class="col-2" for="date">Date de départ :</label>
             <input type="date" name="dateDepart" class="dateD" id="date">
             <br>
-            <div class="d-flex">
-                <label class="fw-bold col-2" for="pass">Nuits :</label>
-                <h5 class="col-3" id="passNight" name="dure" value=""></h5>
-            </div>
+
         </div>
         
 
@@ -66,22 +66,22 @@
         </div>
         <div class="d-flex">
             <div class="d-block">
-                <label class="col-12" for="plongé1">
-                    <input name="p1" id="plongé" value="baptême de plongée" type="checkbox">baptême de plongée
+                <label class="col-12" for="plongé">
+                    <input name="p1" class="p1" id="plongé" value="baptême de plongée" type="checkbox">baptême de plongée
                 </label>
-                <label class="col-12" for="plongé2">
-                    <input name="p2" id="plongé" value="brevet de plongée" type="checkbox">brevet de plongée
+                <label class="col-12" for="plongé1">
+                    <input name="p2" class="p2" id="plongé" value="brevet de plongée" type="checkbox">brevet de plongée
                 </label>
             </div>
             <div class="d-block ">
+                <label class="col-12" for="plongé2">
+                    <input name="p3" class="p3" id="plongé" value="excursion des baleines (juillet-septembre)" type="checkbox">excursion des baleines (juillet-septembre)
+                </label>
                 <label class="col-12" for="plongé3">
-                    <input name="p3" id="plongé" value="excursion des baleines (juillet-septembre)" type="checkbox">excursion des baleines (juillet-septembre)
+                    <input name="p4" class="p4" id="plongé" value="excursions en quad ou moto" type="checkbox">excursions en quad ou moto
                 </label>
                 <label class="col-12" for="plongé4">
-                    <input name="p4" id="plongé" value="excursions en quad ou moto" type="checkbox">excursions en quad ou moto
-                </label>
-                <label class="col-12" for="plongé">
-                    <input name="p" id="plongé" value="excursion avec plongée sous marine" type="checkbox">excursion avec plongée sous marine
+                    <input name="p" class="p" id="plongé" value="excursion avec plongée sous marine" type="checkbox">excursion avec plongée sous marine
                 </label>
             </div>
         </div>
@@ -92,7 +92,6 @@
             <h5>€</h5>
         </div>
         <hr>
-        <br>
         <div style="display: flex;" class="align-items-center ">
             <h5 class="fw-bold mb-0">Adulte :</h5>
             <h5 class="adulteAmount mb-0">0</h5>
@@ -107,34 +106,63 @@
         <br>
         <div style="display: flex;">
             <h5 class="fw-bold">Total :</h5>
-            <h5 class="amountAE" ></h5>
+            <h5 class="amountAE" >0</h5>
+            <h5 class="mb-0">€</h5>
+        </div>
+        <hr>
+        <div style="display: flex;">
+            <h5 class="fw-bold">Nuit :</h5>
+            <h5 id="passNight" >0</h5>
+            <h5 class="mb-0"></h5>
+        </div>
+        <div class="mt-2" style="display: flex;">
+            <h5 class="fw-bold">Total :</h5>
+            <h5 class="amountNuit" >0</h5>
             <h5 class="mb-0">€</h5>
         </div>
         <hr>
         <div style="display: flex;" class="align-items-center "> 
             <h5 class="fw-bold">Activité :</h5>
-            <h5 class="amount1"></h5>
+            <h5 class="amount1">0</h5>
             <h5>€</h5>
+        </div>
+        <div class="d-flex align-items-center mb-1">
+            <p class="mb-0 fw-bold">Nombre de personnes : </p>
+            <input class="ms-1" type="text" name="nbrAA" id="nbrAA" style="width: 4%;height: 3%;" value="">
+            <div class="d-flex ms-2">
+                <button  class="down2" type="button">🔽</button>
+                <button  class="ms-1 up2" type="button">🔼</button>
+            </div>
+        </div>
+        <div class="mt-2" style="display: flex;">
+            <h5 class="fw-bold">Total :</h5>
+            <h5 class="amountActivité" >0</h5>
+            <h5 class="mb-0">€</h5>
         </div>
         <hr>
         <div style="display: flex;">
             <h2 class="fw-bold">Total :</h2>
-            <h2 class="amount2" ></h2>
+            <h2 class="amount2" >0</h2>
             <h2>€</h2>
         </div>
 
 
+        <input type="hidden" name="priceAdulte" id="priceAdulte" value="">
+        <input type="hidden" name="priceEnfant" id="priceEnfant" value="">
+        <input type="hidden" name="totalAE" id="totalAdulteEnfant" value="">
         <input type="hidden" name="price" id="price" value="100.00">
-        <input type="hidden" name="priceActivities" id="priceA" value="100.00">
+        <input type="hidden" name="priceTraitement" id="priceTraitement" value="">
+        <input type="hidden" name="priceActivities" id="priceA" value="">
         <input type="hidden" name="dure" id="dure" value="100.00">
         <br>
         <div id="card-element"></div>
         <br>
-
-        <button type="submit">Payer</button>
+        <div type="submit" id="cardPay"></div>
     </form>
-    
-    <script src="app.js"></script>
+
     <script src="price.js"></script>
+    <script>
+       
+    </script>
 </body>
 </html>

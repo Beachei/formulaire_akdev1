@@ -1,9 +1,12 @@
 document.addEventListener('DOMContentLoaded', function(){
+    let nom = document.getElementById('nom');
+    let prenom = document.getElementById('prenom');
     const selection = document.querySelector('.selection');
     const price = document.getElementById('price');
     const priceA = document.getElementById('priceA');
-    const nombreAdulte = document.getElementById('nbrA')
-    const nombreEnfant = document.getElementById('nbrE')
+    const priceTraitement = document.getElementById('priceTraitement');
+    const nombreAdulte = document.getElementById('nbrA');
+    const nombreEnfant = document.getElementById('nbrE');
     let down = document.querySelector('.down');
     let down1 = document.querySelector('.down1');
     let up = document.querySelector('.up');
@@ -11,10 +14,14 @@ document.addEventListener('DOMContentLoaded', function(){
     let amount = document.querySelector('.amount');
     let amountActivies = document.querySelector('.amount1');
     let adulteAmount = document.querySelector('.adulteAmount');
+    let adultePrice= document.getElementById('priceAdulte');
     let enfantAmount = document.querySelector('.enfantAmount');
+    let enfantPrice = document.getElementById('priceEnfant');
+    let nuitAmount = document.querySelector('.amountNuit')
     const form = document.getElementById('form');
     let Total = document.querySelector('.amount2');
     let TotalAE = document.querySelector('.amountAE');
+    let inputTotalAE = document.querySelector('#totalAdulteEnfant');
     let amountPrice = 0;
     let amountPriceA = 0;
     let halthPrice = 0;
@@ -28,6 +35,10 @@ document.addEventListener('DOMContentLoaded', function(){
     let NowYear = NowDate.getFullYear();
     let NowMonth = NowDate.getMonth() + 1;
     let NowDay = NowDate.getDate();
+    let NombrePersonnesActivité = document.getElementById('nbrAA');
+    let amountActivité = document.querySelector('.amountActivité');
+    let down2 = document.querySelector('.down2');
+    let up2 = document.querySelector('.up2');
     
     selection.addEventListener('change', function(){
         console.log(selection)
@@ -42,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function(){
             amountPrice = 150;
         }
         console.log(amountPrice);
+        priceTraitement.value = amountPrice;
         halthPrice = (amountPrice * 50)/100;
          price.value = amountPrice;
          btnUD(amountPrice)
@@ -82,10 +94,11 @@ document.addEventListener('DOMContentLoaded', function(){
         amount.innerHTML = 150;
         amountPrice = 150;
     }
+    priceTraitement.value = amountPrice;
     price.value = amountPrice;
     console.log(amountPrice)
     halthPrice = (amountPrice * 50)/100;
-    switch(amountPrice){
+   switch(amountPrice){
         case 50:
             nombreEnfant.value = 0
             nombreAdulte.value = 0
@@ -132,8 +145,12 @@ document.addEventListener('DOMContentLoaded', function(){
                     nombreEnfant.value = i;
                     price1 = halthPrice * i;
                     enfantAmount.innerHTML = price1;
+                    enfantPrice.value = price1;
+                    inputTotalAE.value = price1 + parseFloat(adulteAmount.textContent);
                     TotalAE.innerHTML = parseFloat(enfantAmount.textContent) + parseFloat(adulteAmount.textContent);
-                    Total.innerHTML = parseFloat(TotalAE.textContent) + amountPriceA;
+                    nuitAmount.innerHTML = parseFloat(TotalAE.textContent) * parseFloat(nombreDeNuits.textContent)
+                    Total.innerHTML =  parseFloat(nuitAmount.textContent) + parseFloat(amountActivité.textContent);
+                    price.value = nuitAmount.textContent;
                         console.log(`nombre d'enfant : ${i}`);
                         console.log(`prix enfant` +  price1);
                     })
@@ -147,8 +164,13 @@ document.addEventListener('DOMContentLoaded', function(){
             price1 = halthPrice * i
             enfantAmount.innerHTML = price1;
             nombreEnfant.value = i;
+            enfantPrice.value = price1;
+            inputTotalAE.value = price1 + parseFloat(adulteAmount.textContent);
             TotalAE.innerHTML = parseFloat(enfantAmount.textContent) + parseFloat(adulteAmount.textContent);
-            Total.innerHTML = parseFloat(TotalAE.textContent) + amountPriceA;
+            nuitAmount.innerHTML = parseFloat(TotalAE.textContent) * parseFloat(nombreDeNuits.textContent);
+            Total.innerHTML =  parseFloat(nuitAmount.textContent) + parseFloat(amountActivité.textContent);
+            price.value = nuitAmount.textContent;
+
         })
     }
     function btnUD1(Sn1){
@@ -181,10 +203,15 @@ document.addEventListener('DOMContentLoaded', function(){
                         nombreAdulte.value = i;
                         price2 = amountPrice * i;
                         adulteAmount.innerHTML = price2;
-                        console.log(`nombre d'adulte : ${i}`);
+                        console.log(`nombre d'adulte` + nombreAdulte.value);
                         console.log(`prix adulte` +  price2);
+                        adultePrice.value = parseFloat(adulteAmount.textContent);
+                        enfantPrice.value = parseFloat(enfantAmount.textContent);
+                        inputTotalAE.value = parseFloat(enfantAmount.textContent) + parseFloat(adulteAmount.textContent);    
                         TotalAE.innerHTML = parseFloat(enfantAmount.textContent) + parseFloat(adulteAmount.textContent);
-                        Total.innerHTML = parseFloat(TotalAE.textContent) + amountPriceA;
+                        nuitAmount.innerHTML = parseFloat(TotalAE.textContent) * parseFloat(nombreDeNuits.textContent);
+                        Total.innerHTML =  parseFloat(nuitAmount.textContent) + parseFloat(amountActivité.textContent);
+                        price.value = nuitAmount.textContent;
                     })
 
         down1.addEventListener('click',function(){
@@ -197,12 +224,14 @@ document.addEventListener('DOMContentLoaded', function(){
             price2 = amountPrice * i;
             adulteAmount.innerHTML = price2;
             console.log('affiche le i de i-- :' + i)
-            TotalAE.innerHTML = parseFloat(enfantAmount.textContent) + parseFloat(adulteAmount.textContent);
-            Total.innerHTML = parseFloat(TotalAE.textContent) + amountPriceA;
-        })
+            adultePrice.value = price2;
+            inputTotalAE.value = parseFloat(enfantAmount.textContent) + price2;
+            TotalAE.innerHTML = parseFloat(enfantAmount.textContent) + price2; 
+            nuitAmount.innerHTML = parseFloat(TotalAE.textContent) * parseFloat(nombreDeNuits.textContent);
+            Total.innerHTML =  parseFloat(nuitAmount.textContent) + parseFloat(amountActivité.textContent);
+            price.value = nuitAmount.textContent;
+            })
     }
-    
-
 
     if(date1.value == ""){
         date2.disabled = true;
@@ -210,10 +239,6 @@ document.addEventListener('DOMContentLoaded', function(){
         date2.disabled = false;
     }
     form.addEventListener('change', function(){
-        let a = amountPriceA ;
-        let b = parseFloat(TotalAE.textContent);
-        let c = a+b;
-        Total.innerHTML = c;
         if(date1.value == ""){
             date2.disabled = true;
         }else{
@@ -230,11 +255,11 @@ document.addEventListener('DOMContentLoaded', function(){
                 console.log("arrivé" + " " + arrivé.getTime())   
                 nombreDeNuits.innerHTML = diffDays;
                 nightToPhp.value = nombreDeNuits.textContent;
-                amount.innerHTML = amountPrice * diffDays;
-                let LogementNight = amountPrice * diffDays;
-                let c = LogementNight + amountPriceA ;
+                let LogementNight = parseFloat(TotalAE.textContent) * diffDays;
+                let c = LogementNight + parseFloat(amountActivité.textContent) ;
                 price.value = LogementNight;
                 console.log(nightToPhp.value)
+                nuitAmount.innerHTML = LogementNight;
                 Total.innerHTML = c;
             }, 100);
         }
@@ -267,7 +292,8 @@ document.addEventListener('DOMContentLoaded', function(){
                 }
                 console.log(amountPriceA)
                 amountActivies.innerHTML = amountPriceA;
-                priceA.value = amountPriceA;
+                priceA.value = amountActivité.textContent;               
+                amountActivité.innerHTML = amountPriceA* NombrePersonnesActivité.value;
             }
             else{
                 console.log('not checked')
@@ -293,15 +319,40 @@ document.addEventListener('DOMContentLoaded', function(){
                         amountPriceA -= 11;                    
                         break
                 }
+                amountActivité.innerHTML = amountPriceA* NombrePersonnesActivité.value;
                 console.log(amountPriceA)
                 amountActivies.innerHTML = amountPriceA;
-                priceA.value = amountPriceA;
+                priceA.value = amountActivité.textContent;
             }
-            
-        
+            Total.innerHTML = parseFloat(TotalAE.textContent) + parseFloat(amountActivité.textContent);
         })
     })
-console.log()
+    let activitiesPrice = amountActivies.textContent;
+    setInterval( function (){
+        activitiesPrice = amountActivies.textContent;
+   }, 1000);
+    let iForA = 0;
+    up2.addEventListener('click', function(){
+        iForA = iForA+=1
+        NombrePersonnesActivité.value = iForA;
+        amountActivité.innerHTML = parseFloat(activitiesPrice)* iForA;
+        Total.innerHTML = parseFloat(nuitAmount.textContent) + parseFloat(amountActivité.textContent);
+        Total.value = parseFloat(nuitAmount.textContent) + parseFloat(amountActivité.textContent);
+        priceA.value = parseFloat(activitiesPrice)* iForA;
+    })
+    down2.addEventListener('click', function(){
+        if(iForA <= 0){
+            iForA =0;
+        }else{
+            iForA-=1
+        }
+        NombrePersonnesActivité.value = iForA;      
+        amountActivité.innerHTML = parseFloat(activitiesPrice)* iForA;
+        Total.innerHTML = parseFloat(nuitAmount.textContent) + parseFloat(amountActivité.textContent);
+        Total.value = parseFloat(nuitAmount.textContent) + parseFloat(amountActivité.textContent);
+        priceA.value = parseFloat(activitiesPrice)* iForA;
+    })
+
 date.forEach(function(date){   
     date.addEventListener('change', function(){
         setTimeout(function(){console.log(date1.value)},100)
@@ -333,8 +384,77 @@ date.forEach(function(date){
         }
     })
 })
-
-    })
+let pay = Total.textContent;
+let firstName = nom.textContent;
+let lastName = prenom.textContent;
+setInterval( function allocation(){
+     pay = Total.textContent;
+     firstName = nom.textContent;
+     lastName = prenom.textContent;
+}, 1000);
+paypal.Buttons({
+    style: {
+    layout: 'vertical',
+    color:  'blue',
+    shape:  'rect',
+    label:  'paypal'
+    },
+    createOrder: function(data, actions) {
+    return actions.order.create({
+      purchase_units: [{
+        amount: {
+          currency_code: 'USD',
+          value: pay
+        },
+        payer: {
+            name: {
+                given_name: firstName,
+                surname: lastName
+            }
+        },
+      }]
+    });
+    },
+    onApprove: function(data, actions) {
+    return actions.order.capture().then(function(details) {
+      alert('Transaction completed by ' + details.payer.name.given_name);
+      $(document).ready(function(){
+        $.ajax({
+            url:'app.php',
+            type:'POST',
+            data: {
+                price : pay,
+                priceActivities: priceA.value,
+                priceTraitement: priceTraitement.value,
+                priceAdulte: adultePrice.value,
+                priceEnfant: enfantPrice.value,
+                totalAE: inputTotalAE.value,
+                nom: $('#nom').val(),
+                prenom: $('#prenom').val(),
+                mail: $('#mail').val(),
+                selection: selection.value,
+                dateArrive: date1.value,
+                dateDepart: date2.value,
+                dure: nightToPhp.value,
+                nbrA: nombreAdulte.value,
+                nbrE: nombreEnfant.value,
+                p: $('.p').val(),
+                p1: $('.p1').val(),
+                p2: $('.p2').val(),
+                p3: $('.p3').val(),
+                p4: $('.p4').val(),
+            },
+            success: function(){}
+          })
+      })
+    });
+    },
+    onError: function(err) {
+    console.error(err);
+    alert('An error occurred with the payment.');
+    }
+    }).render('#cardPay');
+ })
 
     
     
