@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function(){
     let amountPrice = 0;
     let amountPriceA = 0;
     let halthPrice = 0;
-    const check = document.querySelectorAll('#plongé');
+    const check = document.querySelectorAll('.plongé');
     const date = document.querySelectorAll('#date')
     let date1 =  document.querySelector('.dateA');
     let date2 =  document.querySelector('.dateD');
@@ -39,6 +39,12 @@ document.addEventListener('DOMContentLoaded', function(){
     let amountActivité = document.querySelector('.amountActivité');
     let down2 = document.querySelector('.down2');
     let up2 = document.querySelector('.up2');
+    const lisSup = document.querySelector('#suplement');
+    let familialeCount = document.querySelector('.familialeCount');
+
+    NombrePersonnesActivité.disabled = true ;
+    nombreAdulte.disabled = true;
+    nombreEnfant.disabled = true;
     
     selection.addEventListener('change', function(){
         console.log(selection)
@@ -119,28 +125,18 @@ document.addEventListener('DOMContentLoaded', function(){
                 let price1 =0;
                 up.addEventListener('click',function (){
                     console.log(nombreEnfant.value)
-                    switch(Sn){
-                        case 50:
-                                if (i < 2) {
-                                    i++;
-                                } else {
-                                    i = 2;
-                                }
-                                break;
-                            case 100:
-                                if (i < 3) {
-                                    i++;
-                                } else {
-                                    i = 3;
-                                }
-                                break;
-                            case 150:
-                                if (i < 4) {
-                                    i++;
-                                } else {
-                                    i = 4;
-                                }
-                                break;
+                    if(familialeCount.value != 3){
+                        if (i < 4) {
+                            i++;
+                        } else {
+                            i = 4;
+                        }
+                    }else{
+                        if (i < 3) {
+                            i++;
+                        } else {
+                            i = 3;
+                        }
                     }
                     nombreEnfant.value = i;
                     price1 = halthPrice * i;
@@ -177,28 +173,18 @@ document.addEventListener('DOMContentLoaded', function(){
                 let i = 0 ;
                 let price2 = 0;
                     up1.addEventListener('click', function () {
-                        switch (Sn1) {
-                            case 50:
-                                if (i < 2) {
-                                    i++;
-                                } else {
-                                    i = 2;
-                                }
-                                break;
-                            case 100:
-                                if (i < 3) {
-                                    i++;
-                                } else {
-                                    i = 3;
-                                }
-                                break;
-                            case 150:
-                                if (i < 4) {
-                                    i++;
-                                } else {
-                                    i = 4;
-                                }
-                                break;
+                        if(familialeCount.value != 3){
+                            if (i < 4) {
+                                i++;
+                            } else {
+                                i = 4;
+                            }
+                        }else{
+                            if (i < 3) {
+                                i++;
+                            } else {
+                                i = 3;
+                            }
                         }
                         nombreAdulte.value = i;
                         price2 = amountPrice * i;
@@ -212,7 +198,7 @@ document.addEventListener('DOMContentLoaded', function(){
                         nuitAmount.innerHTML = parseFloat(TotalAE.textContent) * parseFloat(nombreDeNuits.textContent);
                         Total.innerHTML =  parseFloat(nuitAmount.textContent) + parseFloat(amountActivité.textContent);
                         price.value = nuitAmount.textContent;
-                    })
+        })
 
         down1.addEventListener('click',function(){
             if (i > 0) {
@@ -238,6 +224,87 @@ document.addEventListener('DOMContentLoaded', function(){
     }else{
         date2.disabled = false;
     }
+    if(date1.value !== "" && date2.value !==""){
+        setTimeout(() => {
+            lisSup.disabled = false;
+            $('#label').css('color','black')
+        }, 100);
+    }else{
+        lisSup.disabled = true;
+        $('#label').css('color','gray')
+    }
+    let activitéArray = [];
+    let iForA = 0;
+    check.forEach(function(check){
+        check.addEventListener('input', function(){
+            if(check.checked){
+                console.log(check.value)
+                switch(check.value){
+                    case "excursion avec plongée sous marine":
+                        console.log('15€');
+                        amountPriceA += 15;
+                        break
+                    case "baptême de plongée":
+                        console.log('20€');
+                        amountPriceA += 20;
+                        break
+                    case "brevet de plongée":
+                        console.log('18€');
+                        amountPriceA += 18;   
+                        break
+                    case "excursion des baleines (juillet-septembre)":
+                        console.log('16€');
+                        amountPriceA += 16;     
+                        break
+                    case "excursions en quad ou moto":
+                        console.log('11€');
+                        amountPriceA += 11;                                   
+                        break
+                }
+                activitéArray.push(check.value)
+                amountActivies.innerHTML = amountPriceA;
+                priceA.value = amountActivité.textContent;               
+                amountActivité.innerHTML = amountPriceA* NombrePersonnesActivité.value;
+            }
+            else{
+                console.log('not checked')
+                switch(check.value){
+                    case "excursion avec plongée sous marine":
+                        console.log('15€');
+                        amountPriceA -= 15;
+                        activitéArray = activitéArray.filter(index => index !== 'excursion avec plongée sous marine')
+                        break
+                    case "baptême de plongée":
+                        console.log('20€');
+                        amountPriceA -= 20;
+                        activitéArray = activitéArray.filter(index => index !== 'baptême de plongée')
+                        break
+                    case "brevet de plongée":
+                        console.log('18€');
+                        amountPriceA -= 18;                 
+                        activitéArray = activitéArray.filter(index => index !== 'brevet de plongée')   
+                        break
+                    case "excursion des baleines (juillet-septembre)":
+                        console.log('16€');
+                        amountPriceA -= 16;                      
+                        activitéArray = activitéArray.filter(index => index !== 'excursion des baleines (juillet-septembre)')
+                        break
+                    case "excursions en quad ou moto":
+                        console.log('11€');
+                        amountPriceA -= 11;              
+                        activitéArray = activitéArray.filter(index => index !== 'excursions en quad ou moto')      
+                        break
+                }
+                amountActivité.innerHTML = amountPriceA* NombrePersonnesActivité.value;
+                console.log(amountPriceA)
+                amountActivies.innerHTML = amountPriceA;
+                priceA.value = amountActivité.textContent;
+            }
+            NombrePersonnesActivité.value = 1;
+            iForA = 1;
+            Total.innerHTML = parseFloat(TotalAE.textContent) + parseFloat(amountActivité.textContent);
+        })
+    })
     form.addEventListener('change', function(){
         if(date1.value == ""){
             date2.disabled = true;
@@ -256,82 +323,22 @@ document.addEventListener('DOMContentLoaded', function(){
                 nombreDeNuits.innerHTML = diffDays;
                 nightToPhp.value = nombreDeNuits.textContent;
                 let LogementNight = parseFloat(TotalAE.textContent) * diffDays;
-                let c = LogementNight + parseFloat(amountActivité.textContent) ;
+                let c = LogementNight + parseFloat(amountActivité.textContent) + parseFloat($('.prixLits').text()) ;
                 price.value = LogementNight;
                 console.log(nightToPhp.value)
-                nuitAmount.innerHTML = LogementNight;
+                nuitAmount.innerHTML = LogementNight + parseFloat($('.prixLits').text());
                 Total.innerHTML = c;
+                lisSup.disabled = false;
+                $('#label').css('color','black')
             }, 100);
         }
     })  
-    check.forEach(function(check){
-        check.addEventListener('input', function(){
-            if(check.checked){
-                console.log(check.value)
-                switch(check.value){
-                    case "excursion avec plongée sous marine":
-                        console.log('15€');
-                        amountPriceA += 15;
-                        break
-                    case "baptême de plongée":
-                        console.log('20€');
-                        amountPriceA += 20;
-                        break
-                    case "brevet de plongée":
-                        console.log('18€');
-                        amountPriceA += 18;                    
-                        break
-                    case "excursion des baleines (juillet-septembre)":
-                        console.log('16€');
-                        amountPriceA += 16;                      
-                        break
-                    case "excursions en quad ou moto":
-                        console.log('11€');
-                        amountPriceA += 11;                    
-                        break
-                }
-                console.log(amountPriceA)
-                amountActivies.innerHTML = amountPriceA;
-                priceA.value = amountActivité.textContent;               
-                amountActivité.innerHTML = amountPriceA* NombrePersonnesActivité.value;
-            }
-            else{
-                console.log('not checked')
-                switch(check.value){
-                    case "excursion avec plongée sous marine":
-                        console.log('15€');
-                        amountPriceA -= 15;
-                        break
-                    case "baptême de plongée":
-                        console.log('20€');
-                        amountPriceA -= 20;
-                        break
-                    case "brevet de plongée":
-                        console.log('18€');
-                        amountPriceA -= 18;                    
-                        break
-                    case "excursion des baleines (juillet-septembre)":
-                        console.log('16€');
-                        amountPriceA -= 16;                      
-                        break
-                    case "excursions en quad ou moto":
-                        console.log('11€');
-                        amountPriceA -= 11;                    
-                        break
-                }
-                amountActivité.innerHTML = amountPriceA* NombrePersonnesActivité.value;
-                console.log(amountPriceA)
-                amountActivies.innerHTML = amountPriceA;
-                priceA.value = amountActivité.textContent;
-            }
-            Total.innerHTML = parseFloat(TotalAE.textContent) + parseFloat(amountActivité.textContent);
-        })
-    })
+
     let activitiesPrice = amountActivies.textContent;
     setInterval( function (){
         activitiesPrice = amountActivies.textContent;
    }, 1000);
-    let iForA = 0;
+
     up2.addEventListener('click', function(){
         iForA = iForA+=1
         NombrePersonnesActivité.value = iForA;
@@ -341,8 +348,8 @@ document.addEventListener('DOMContentLoaded', function(){
         priceA.value = parseFloat(activitiesPrice)* iForA;
     })
     down2.addEventListener('click', function(){
-        if(iForA <= 0){
-            iForA =0;
+        if(iForA <= 1){
+            iForA =1;
         }else{
             iForA-=1
         }
@@ -384,13 +391,16 @@ date.forEach(function(date){
         }
     })
 })
+
 let pay = Total.textContent;
 let firstName = nom.textContent;
+let activitéPrix = $('.amountActivité').text();
 let lastName = prenom.textContent;
 setInterval( function allocation(){
      pay = Total.textContent;
-     firstName = nom.textContent;
+     firstName = nom.value;
      lastName = prenom.textContent;
+     activitéPrix = $('.amountActivité').text();
 }, 1000);
 paypal.Buttons({
     style: {
@@ -417,19 +427,40 @@ paypal.Buttons({
     },
     onApprove: function(data, actions) {
     return actions.order.capture().then(function(details) {
-      alert('Transaction completed by ' + details.payer.name.given_name);
+   //   alert('Transaction completed by ' + details.payer.name.given_name);
       $(document).ready(function(){
+        $('.payment-status').show('slow')
+        $('#cardPay').hide('slow');
+        $('.approved').show('slow');
+        $('.rejected').hide();
+        $('.approve-message').hide()
+        $('.approve-message').css('opacity','0')
+        $('.animation-a').html('<lottie-player class="approve-anim" src="./assets/Animate status/approved.json" background="transparent" speed="1" style="width: 300px; height: 300px;"  autoplay></lottie-player>')
+        setTimeout(function(){
+            $('.approve-message').show('slow')
+            $('.approve-message').animate({
+                opacity : '1'
+            },'slow')
+        },1500)
+        setTimeout(function(){
+            $('.approve-anim').hide('slow')
+        },1200)
+        $(".retour").click(function(){
+            $('.rejected').hide('slow')
+            $('.approved').hide('slow')
+            $('.payment-status').hide()
+        })
         $.ajax({
             url:'app.php',
             type:'POST',
             data: {
                 price : pay,
-                priceActivities: priceA.value,
+                priceActivities: activitéPrix,
                 priceTraitement: priceTraitement.value,
                 priceAdulte: adultePrice.value,
                 priceEnfant: enfantPrice.value,
                 totalAE: inputTotalAE.value,
-                nom: $('#nom').val(),
+                nom: firstName.toUpperCase(),
                 prenom: $('#prenom').val(),
                 mail: $('#mail').val(),
                 selection: selection.value,
@@ -438,20 +469,41 @@ paypal.Buttons({
                 dure: nightToPhp.value,
                 nbrA: nombreAdulte.value,
                 nbrE: nombreEnfant.value,
-                p: $('.p').val(),
-                p1: $('.p1').val(),
-                p2: $('.p2').val(),
-                p3: $('.p3').val(),
-                p4: $('.p4').val(),
+                nbrPIAA: $('.nbrAA').val(),
+                activité:  activitéArray,
+                prixSup : $('.prixLits').text(),
+                litSup : $('#lit').text()
             },
-            success: function(){}
+            success: function(){
+            }
           })
       })
     });
     },
     onError: function(err) {
-    console.error(err);
-    alert('An error occurred with the payment.');
+        $('.payment-status').show('slow')
+        $('.approved').hide()
+        $('.rejected').show('slow');
+        $('.reject-message').hide()
+        $('.animation-r').html('<lottie-player class="reject-anim" src="./assets/Animate status/rejected.json" background="transparent" speed="1" style="width: 300px; height: 300px;"  autoplay></lottie-player>')
+        $('.reject-message').css('opacity','0')
+        $('#cardPay').hide('slow');
+        setTimeout(function(){
+            $('.reject-message').show('slow')
+            $('.reject-message').animate({
+                opacity : '1'
+            },'slow')
+        },1500)
+        setTimeout(function(){
+                $('.reject-anim').hide('slow')
+        },1200)
+        $(".retour").click(function(){
+            $('.rejected').hide('slow');
+            $('.approved').hide('slow');
+            $('.payment-status').hide();
+            $('#cardPay').show('slow');
+        })
+        console.log('blem an')
     }
     }).render('#cardPay');
  })
