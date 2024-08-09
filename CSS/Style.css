@@ -21,9 +21,7 @@
 .shadow-1{
     box-shadow: 0px 0px 25px 1px rgba(0, 0, 0, 0.356);
 }
-.radius{
-    border-radius: 20px;
-}
+
 .radius-1{
     border-radius:5px ;
 }
@@ -49,9 +47,18 @@ backdrop-filter: blur(2px);
     background-size: cover;
     background-position: 0 -1vh;
 }
+.bg-5m{
+    background: url('../assets/4.jpg') no-repeat;
+    background-size: cover;
+}
 .bg-6{
     background: transparent;
     backdrop-filter: blur(1.5px);
+}
+.bulle{
+    background-color: black;
+    height: 5%;
+
 }
 .border-bas{
     border-top: none;
@@ -64,6 +71,12 @@ backdrop-filter: blur(2px);
 }
 .border-radius-bottom-right{
     border-bottom-right-radius: 20px;
+}
+.border-radius-top-left{
+    border-top-left-radius: 35px;
+}
+.border-radius-bottom-left{
+    border-bottom-left-radius: 35px;
 }
 
 .hr{
@@ -86,6 +99,9 @@ backdrop-filter: blur(2px);
     height: 100vh;
     z-index: 2;
 }
+.overlay-1{
+    position: fixed;
+}
 
 .overflow-h{
     overflow: hidden;
@@ -95,4 +111,9 @@ backdrop-filter: blur(2px);
 }
 .radius-m{
     border-radius: 0.8em;
+}
+/**************************** MOBILE *********************/
+.mobile-suivi > hr{
+    margin-top: 5px;
+    margin-bottom: 5px;
 }

@@ -1,34 +1,34 @@
 document.addEventListener('DOMContentLoaded', function(){
     let nom = document.getElementById('nom');
     let prenom = document.getElementById('prenom');
-    const selection = document.querySelector('.selection');
+    const selection = document.querySelectorAll('.selection');
     const price = document.getElementById('price');
     const priceA = document.getElementById('priceA');
     const priceTraitement = document.getElementById('priceTraitement');
-    const nombreAdulte = document.getElementById('nbrA');
-    const nombreEnfant = document.getElementById('nbrE');
+    const nombreAdulte = document.querySelectorAll('#nbrA');
+    const nombreEnfant = document.querySelectorAll('#nbrE');
     let down = document.querySelector('.down');
     let down1 = document.querySelector('.down1');
     let up = document.querySelector('.up');
     let up1 = document.querySelector('.up1');
-    let amount = document.querySelector('.amount');
+    let amount = document.querySelectorAll('.amount');
     let amountActivies = document.querySelector('.amount1');
-    let adulteAmount = document.querySelector('.adulteAmount');
+    let adulteAmount = document.querySelectorAll('.adulteAmount');
     let adultePrice= document.getElementById('priceAdulte');
-    let enfantAmount = document.querySelector('.enfantAmount');
+    let enfantAmount = document.querySelectorAll('.enfantAmount');
     let enfantPrice = document.getElementById('priceEnfant');
     let nuitAmount = document.querySelector('.amountNuit')
     const form = document.getElementById('form');
     let Total = document.querySelector('.amount2');
-    let TotalAE = document.querySelector('.amountAE');
+    let TotalAE = document.querySelectorAll('.amountAE');
     let inputTotalAE = document.querySelector('#totalAdulteEnfant');
     let amountPrice = 0;
     let amountPriceA = 0;
     let halthPrice = 0;
     const check = document.querySelectorAll('.plongé');
     const date = document.querySelectorAll('#date')
-    let date1 =  document.querySelector('.dateA');
-    let date2 =  document.querySelector('.dateD');
+    let date1 =  document.querySelectorAll('.dateA');
+    let date2 =  document.querySelectorAll('.dateD');
     let nombreDeNuits = document.getElementById('passNight')
     let nightToPhp = document.getElementById('dure')
     const NowDate = new Date();
@@ -41,65 +41,62 @@ document.addEventListener('DOMContentLoaded', function(){
     let up2 = document.querySelector('.up2');
     const lisSup = document.querySelector('#suplement');
     let familialeCount = document.querySelector('.familialeCount');
+    let nombreAE = document.querySelectorAll('.nombre')
 
     NombrePersonnesActivité.disabled = true ;
-    nombreAdulte.disabled = true;
-    nombreEnfant.disabled = true;
-    
-    selection.addEventListener('change', function(){
-        console.log(selection)
-        if(selection.value == 1){
-            amount.innerHTML = 50;
-            amountPrice = 50;
-        }else if(selection.value == 2){
-            amount.innerHTML = 100;
-            amountPrice = 100;
-        }else if(selection.value == 3){
-            amount.innerHTML = 150;
-            amountPrice = 150;
-        }
-        console.log(amountPrice);
-        priceTraitement.value = amountPrice;
-        halthPrice = (amountPrice * 50)/100;
-         price.value = amountPrice;
-         btnUD(amountPrice)
-         btnUD1(amountPrice)
-         switch(amountPrice){
-            case 50:
-                nombreEnfant.value = 0
-                nombreAdulte.value = 0
-                adulteAmount.innerHTML = 0
-                enfantAmount.innerHTML = 0
+    selection.forEach(function(select){
+    amount.forEach(function(amount){
+        select.addEventListener('change', function(){
+            console.log(selection)
+            if(select.value == 1){
+                amount.innerHTML = 50;
+                amountPrice = 50;
+            }else if(select.value == 2){
+                amount.innerHTML = 100;
+                amountPrice = 100;
+            }else if(select.value == 3){
+                amount.innerHTML = 150;
+                amountPrice = 150;
+            }
+            nombreEnfant.forEach(function(nE){
+                nE.value = 0
+            })
+            nombreAdulte.forEach(function(nA){
+                nA.value = 0
+            })
+            enfantAmount.forEach(function(Eamount){
+                Eamount.innerHTML = 0;
+            })
+            adulteAmount.forEach(function(Aamout){
+                Aamout.innerHTML = 0;
+            })
+            TotalAE.forEach(function(TotalAE){
                 TotalAE.innerHTML = 0
-                break
-            case 100:
-                nombreEnfant.value = 0
-                nombreAdulte.value = 0
-                adulteAmount.innerHTML = 0
-                enfantAmount.innerHTML = 0
-                TotalAE.innerHTML = 0
-                break
-            case 150:
-                nombreEnfant.value = 0
-                nombreAdulte.value = 0
-                adulteAmount.innerHTML = 0
-                enfantAmount.innerHTML = 0
-                TotalAE.innerHTML = 0
-                break
-         }
+            })
+            console.log(amountPrice);
+            priceTraitement.value = amountPrice;
+            halthPrice = (amountPrice * 50)/100;
+             price.value = amountPrice;
+             btnUD(amountPrice)
+             btnUD1(amountPrice)
+        })
+
+            if(select.value == 1){
+                amount.innerHTML = 50;
+                amountPrice = 50;
+            }
+            if(select.value == 2){
+                amount.innerHTML = 100;
+                amountPrice = 100;
+            }
+            if(select.value == 3){
+                amount.innerHTML = 150;
+                amountPrice = 150;
+            }
+        }) 
     })
-    if(selection.value == 1){
-        amount.innerHTML = 50;
-        amountPrice = 50;
-    }
-    if(selection.value == 2){
-        amount.innerHTML = 100;
-        amountPrice = 100;
-    }
-    if(selection.value == 3){
-        amount.innerHTML = 150;
-        amountPrice = 150;
-    }
+
+
     priceTraitement.value = amountPrice;
     price.value = amountPrice;
     console.log(amountPrice)
@@ -152,11 +149,7 @@ document.addEventListener('DOMContentLoaded', function(){
                     })
 
         down.addEventListener('click',function(){
-            if (i > 0) {
-                i--;
-            } else {
-                i = 0;
-            }            
+          
             price1 = halthPrice * i
             enfantAmount.innerHTML = price1;
             nombreEnfant.value = i;
@@ -218,13 +211,56 @@ document.addEventListener('DOMContentLoaded', function(){
             price.value = nuitAmount.textContent;
             })
     }
-
-    if(date1.value == ""){
-        date2.disabled = true;
-    }else{
-        date2.disabled = false;
+    let prixEnfant = 0
+    nombreEnfant.forEach(function(nbrE){
+        nbrE.addEventListener('input',function(){
+            prixEnfant = nbrE.value * halthPrice;
+            enfantAmount.forEach(function(Eamount){
+                Eamount.innerHTML = prixEnfant;
+            })
+        })
+    })
+    let prixAdulte = 0;
+    nombreAdulte.forEach(function(nbrA){
+        nbrA.addEventListener('input',function(){
+            prixAdulte = nbrA.value * amountPrice;
+            adulteAmount.forEach(function(Aamout){
+                Aamout.innerHTML = prixAdulte;
+            })
+        })
+    })
+    nombreAE.forEach(function(NAE){
+        NAE.addEventListener('input',function(){
+            TotalAE.forEach(function(TotalAE){
+                TotalAE.innerHTML = prixEnfant + prixAdulte
+            })
+        })
+    })
+    let dateArrive
+    date1.forEach(function(date1){
+            dateArrive = date1.value
+        date1.addEventListener('input',function(){
+            dateArrive = date1.value
+        })
+    })
+    let dateDepart;
+    date2.forEach(function(date2){
+        dateDepart = date2.value
+        disable(date2)
+    })
+    function disable(disableD){
+        disableD.disabled = true;
     }
-    if(date1.value !== "" && date2.value !==""){
+    function activate(activateD){
+        activateD.disabled = false;
+    }
+    if(dateArrive == ""){
+        disable()
+    }else{
+        activate()
+    }
+
+    if(dateArrive !== "" && dateDepart !==""){
         setTimeout(() => {
             lisSup.disabled = false;
             $('#label').css('color','black')
