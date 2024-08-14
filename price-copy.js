@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function(){
     let prenom = document.getElementById('prenom');
     const selection = document.querySelectorAll('.selection');
     const price = document.getElementById('price');
-    const priceA = document.getElementById('priceA');
+    const priceA = document.querySelectorAll('priceA');
     const priceTraitement = document.getElementById('priceTraitement');
     const nombreAdulte = document.querySelectorAll('#nbrA');
     const nombreEnfant = document.querySelectorAll('#nbrE');
@@ -12,14 +12,14 @@ document.addEventListener('DOMContentLoaded', function(){
     let up = document.querySelector('.up');
     let up1 = document.querySelector('.up1');
     let amount = document.querySelectorAll('.amount');
-    let amountActivies = document.querySelector('.amount1');
+    let amountActivies = document.querySelectorAll('.amount1');
     let adulteAmount = document.querySelectorAll('.adulteAmount');
     let adultePrice= document.getElementById('priceAdulte');
     let enfantAmount = document.querySelectorAll('.enfantAmount');
     let enfantPrice = document.getElementById('priceEnfant');
-    let nuitAmount = document.querySelector('.amountNuit')
-    const form = document.getElementById('form');
-    let Total = document.querySelector('.amount2');
+    let nuitAmount = document.querySelectorAll('.amountNuit')
+    const form = document.querySelectorAll('form');
+    let Total = document.querySelectorAll('.amount2');
     let TotalAE = document.querySelectorAll('.amountAE');
     let inputTotalAE = document.querySelector('#totalAdulteEnfant');
     let amountPrice = 0;
@@ -29,21 +29,23 @@ document.addEventListener('DOMContentLoaded', function(){
     const date = document.querySelectorAll('#date')
     let date1 =  document.querySelectorAll('.dateA');
     let date2 =  document.querySelectorAll('.dateD');
-    let nombreDeNuits = document.getElementById('passNight')
-    let nightToPhp = document.getElementById('dure')
+    let nombreDeNuits = document.querySelectorAll('#passNight')
+    let nightToPhp = document.querySelectorAll('#dure')
     const NowDate = new Date();
     let NowYear = NowDate.getFullYear();
     let NowMonth = NowDate.getMonth() + 1;
     let NowDay = NowDate.getDate();
-    let NombrePersonnesActivité = document.getElementById('nbrAA');
-    let amountActivité = document.querySelector('.amountActivité');
+    let NombrePersonnesActivité = document.querySelectorAll('#nbrAA');
+    let amountActivité = document.querySelectorAll('.amountActivité');
     let down2 = document.querySelector('.down2');
     let up2 = document.querySelector('.up2');
-    const lisSup = document.querySelector('#suplement');
-    let familialeCount = document.querySelector('.familialeCount');
+    const lisSup = document.querySelectorAll('#suplement')
+    let familialeCount = document.querySelectorAll('.familialeCount');
     let nombreAE = document.querySelectorAll('.nombre')
-
-    NombrePersonnesActivité.disabled = true ;
+    lisSup.forEach(function(ls){
+        ls.disabled = true;
+        $('.label').css('color','gray')
+    })
     selection.forEach(function(select){
     amount.forEach(function(amount){
         select.addEventListener('change', function(){
@@ -77,8 +79,6 @@ document.addEventListener('DOMContentLoaded', function(){
             priceTraitement.value = amountPrice;
             halthPrice = (amountPrice * 50)/100;
              price.value = amountPrice;
-             btnUD(amountPrice)
-             btnUD1(amountPrice)
         })
 
             if(select.value == 1){
@@ -115,102 +115,6 @@ document.addEventListener('DOMContentLoaded', function(){
             nombreAdulte.value = 0
             break
     }
-    btnUD(amountPrice)
-    btnUD1(amountPrice)
-    function btnUD(Sn){
-                let i = 0 ; 
-                let price1 =0;
-                up.addEventListener('click',function (){
-                    console.log(nombreEnfant.value)
-                    if(familialeCount.value != 3){
-                        if (i < 4) {
-                            i++;
-                        } else {
-                            i = 4;
-                        }
-                    }else{
-                        if (i < 3) {
-                            i++;
-                        } else {
-                            i = 3;
-                        }
-                    }
-                    nombreEnfant.value = i;
-                    price1 = halthPrice * i;
-                    enfantAmount.innerHTML = price1;
-                    enfantPrice.value = price1;
-                    inputTotalAE.value = price1 + parseFloat(adulteAmount.textContent);
-                    TotalAE.innerHTML = parseFloat(enfantAmount.textContent) + parseFloat(adulteAmount.textContent);
-                    nuitAmount.innerHTML = parseFloat(TotalAE.textContent) * parseFloat(nombreDeNuits.textContent)
-                    Total.innerHTML =  parseFloat(nuitAmount.textContent) + parseFloat(amountActivité.textContent);
-                    price.value = nuitAmount.textContent;
-                        console.log(`nombre d'enfant : ${i}`);
-                        console.log(`prix enfant` +  price1);
-                    })
-
-        down.addEventListener('click',function(){
-          
-            price1 = halthPrice * i
-            enfantAmount.innerHTML = price1;
-            nombreEnfant.value = i;
-            enfantPrice.value = price1;
-            inputTotalAE.value = price1 + parseFloat(adulteAmount.textContent);
-            TotalAE.innerHTML = parseFloat(enfantAmount.textContent) + parseFloat(adulteAmount.textContent);
-            nuitAmount.innerHTML = parseFloat(TotalAE.textContent) * parseFloat(nombreDeNuits.textContent);
-            Total.innerHTML =  parseFloat(nuitAmount.textContent) + parseFloat(amountActivité.textContent);
-            price.value = nuitAmount.textContent;
-
-        })
-    }
-    function btnUD1(Sn1){
-                let i = 0 ;
-                let price2 = 0;
-                    up1.addEventListener('click', function () {
-                        if(familialeCount.value != 3){
-                            if (i < 4) {
-                                i++;
-                            } else {
-                                i = 4;
-                            }
-                        }else{
-                            if (i < 3) {
-                                i++;
-                            } else {
-                                i = 3;
-                            }
-                        }
-                        nombreAdulte.value = i;
-                        price2 = amountPrice * i;
-                        adulteAmount.innerHTML = price2;
-                        console.log(`nombre d'adulte` + nombreAdulte.value);
-                        console.log(`prix adulte` +  price2);
-                        adultePrice.value = parseFloat(adulteAmount.textContent);
-                        enfantPrice.value = parseFloat(enfantAmount.textContent);
-                        inputTotalAE.value = parseFloat(enfantAmount.textContent) + parseFloat(adulteAmount.textContent);    
-                        TotalAE.innerHTML = parseFloat(enfantAmount.textContent) + parseFloat(adulteAmount.textContent);
-                        nuitAmount.innerHTML = parseFloat(TotalAE.textContent) * parseFloat(nombreDeNuits.textContent);
-                        Total.innerHTML =  parseFloat(nuitAmount.textContent) + parseFloat(amountActivité.textContent);
-                        price.value = nuitAmount.textContent;
-        })
-
-        down1.addEventListener('click',function(){
-            if (i > 0) {
-                i--;
-            } else {
-                i = 0;
-            }
-            nombreAdulte.value = i;
-            price2 = amountPrice * i;
-            adulteAmount.innerHTML = price2;
-            console.log('affiche le i de i-- :' + i)
-            adultePrice.value = price2;
-            inputTotalAE.value = parseFloat(enfantAmount.textContent) + price2;
-            TotalAE.innerHTML = parseFloat(enfantAmount.textContent) + price2; 
-            nuitAmount.innerHTML = parseFloat(TotalAE.textContent) * parseFloat(nombreDeNuits.textContent);
-            Total.innerHTML =  parseFloat(nuitAmount.textContent) + parseFloat(amountActivité.textContent);
-            price.value = nuitAmount.textContent;
-            })
-    }
     let prixEnfant = 0
     nombreEnfant.forEach(function(nbrE){
         nbrE.addEventListener('input',function(){
@@ -229,48 +133,57 @@ document.addEventListener('DOMContentLoaded', function(){
             })
         })
     })
+    let nombreAEV ;
     nombreAE.forEach(function(NAE){
         NAE.addEventListener('input',function(){
             TotalAE.forEach(function(TotalAE){
                 TotalAE.innerHTML = prixEnfant + prixAdulte
+                nombreAEV = prixEnfant + prixAdulte
             })
         })
     })
-    let dateArrive
-    date1.forEach(function(date1){
-            dateArrive = date1.value
+    date2.forEach(function(dated){
+        dated.disabled = true;
+    })
+    let dateArrive ="";
+    date1.forEach(function(date1){    
+        date1.setAttribute('min', NowDate.toISOString().split('T')[0]) 
         date1.addEventListener('input',function(){
-            dateArrive = date1.value
+                dateArrive = date1.value
+                let dateCHange = new Date(dateArrive);
+                dateCHange.setDate(dateCHange.getDate()+1)
+                if(dateArrive != ""){
+                    date2.forEach(function(dated){
+                        dated.disabled = false;
+                        dated.setAttribute('min', dateCHange.toISOString().substr(0,10)) 
+                    })
+                }
         })
     })
-    let dateDepart;
-    date2.forEach(function(date2){
-        dateDepart = date2.value
-        disable(date2)
+    let dateDepart ="";
+    date2.forEach(function(dated){
+        dated.addEventListener('input',function(){
+            dateDepart = dated.value
+        })
     })
-    function disable(disableD){
-        disableD.disabled = true;
-    }
-    function activate(activateD){
-        activateD.disabled = false;
-    }
-    if(dateArrive == ""){
-        disable()
-    }else{
-        activate()
-    }
 
-    if(dateArrive !== "" && dateDepart !==""){
+/*     if(dateArrive !== "" && dateDepart !==""){
         setTimeout(() => {
-            lisSup.disabled = false;
-            $('#label').css('color','black')
+            lisSup.forEach(function(supl){
+                supl.disabled = false;
+            })
+            $('.label').css('color','black')
         }, 100);
     }else{
-        lisSup.disabled = true;
-        $('#label').css('color','gray')
-    }
+        lisSup.forEach(function(supl){
+            supl.disabled = true;
+        })
+        $('.label').css('color','gray')
+    } */
     let activitéArray = [];
     let iForA = 0;
+    let Aactivité;
+    let Aactivities;
     check.forEach(function(check){
         check.addEventListener('input', function(){
             if(check.checked){
@@ -298,9 +211,16 @@ document.addEventListener('DOMContentLoaded', function(){
                         break
                 }
                 activitéArray.push(check.value)
-                amountActivies.innerHTML = amountPriceA;
-                priceA.value = amountActivité.textContent;               
-                amountActivité.innerHTML = amountPriceA* NombrePersonnesActivité.value;
+                amountActivies.forEach(function(aa){
+                    aa.innerHTML = amountPriceA
+                    Aactivities = amountPriceA
+                })
+                amountActivité.forEach(function(aa){
+                    amountActivité.innerHTML = amountPriceA* NombrePersonnesActivité.value;
+                })
+                priceA.forEach(function(pa){
+                    pa.value = amountActivité.textContent; 
+                })
             }
             else{
                 console.log('not checked')
@@ -341,93 +261,64 @@ document.addEventListener('DOMContentLoaded', function(){
             Total.innerHTML = parseFloat(TotalAE.textContent) + parseFloat(amountActivité.textContent);
         })
     })
-    form.addEventListener('change', function(){
-        if(date1.value == ""){
-            date2.disabled = true;
-        }else{
-            date2.disabled = false;
-        }
-        if(date1.value !== "" && date2.value !==""){
+
+
+   NombrePersonnesActivité.forEach(function(NPA){
+    NPA.addEventListener('input',function(){
+        iForA = NPA.value;
+        Aactivité = Aactivities *iForA;
+        amountActivité.forEach(function(AA){
+            AA.innerHTML = Aactivité
+        })
+        priceA.forEach(function(PA){
+            PA.value = Aactivité;
+        })
+    })
+   })
+
+
+date.forEach(function(date){   
+    date.addEventListener('input', function(){
+        if(dateArrive != "" && dateDepart != ""){
             setTimeout(() => {
-            let arrivé = new Date(date1.value)
-            let départ = new Date(date2.value)
+            let arrivé = new Date(dateArrive)
+            let départ = new Date(dateDepart)
             let night = départ.getTime()  - arrivé.getTime() ;
             const diffDays = Math.floor(night / (1000 * 60 * 60 * 24))
                 console.log("nuit" + " " + diffDays)   
                 console.log("départ" + " " + départ.getTime())   
                 console.log("arrivé" + " " + arrivé.getTime())   
-                nombreDeNuits.innerHTML = diffDays;
-                nightToPhp.value = nombreDeNuits.textContent;
-                let LogementNight = parseFloat(TotalAE.textContent) * diffDays;
-                let c = LogementNight + parseFloat(amountActivité.textContent) + parseFloat($('.prixLits').text()) ;
+                nombreDeNuits.forEach(function(NDN){
+                    NDN.innerHTML = diffDays;
+                })
+                nightToPhp.forEach(function(NTP){
+                    NTP.value = diffDays
+                })
+                let LogementNight = nombreAEV * diffDays;
+                let c = LogementNight + Aactivité + parseFloat($('.prixLits').text()) ;
                 price.value = LogementNight;
                 console.log(nightToPhp.value)
-                nuitAmount.innerHTML = LogementNight + parseFloat($('.prixLits').text());
-                Total.innerHTML = c;
-                lisSup.disabled = false;
+                nuitAmount.forEach(function(NA){
+                    NA.innerHTML = LogementNight + parseFloat($('.prixLits').text())
+                })
+                Total.forEach(function(T){
+                 T.innerHTML = c;
+                })
                 $('#label').css('color','black')
-            }, 100);
-        }
-    })  
-
-    let activitiesPrice = amountActivies.textContent;
-    setInterval( function (){
-        activitiesPrice = amountActivies.textContent;
-   }, 1000);
-
-    up2.addEventListener('click', function(){
-        iForA = iForA+=1
-        NombrePersonnesActivité.value = iForA;
-        amountActivité.innerHTML = parseFloat(activitiesPrice)* iForA;
-        Total.innerHTML = parseFloat(nuitAmount.textContent) + parseFloat(amountActivité.textContent);
-        Total.value = parseFloat(nuitAmount.textContent) + parseFloat(amountActivité.textContent);
-        priceA.value = parseFloat(activitiesPrice)* iForA;
-    })
-    down2.addEventListener('click', function(){
-        if(iForA <= 1){
-            iForA =1;
-        }else{
-            iForA-=1
-        }
-        NombrePersonnesActivité.value = iForA;      
-        amountActivité.innerHTML = parseFloat(activitiesPrice)* iForA;
-        Total.innerHTML = parseFloat(nuitAmount.textContent) + parseFloat(amountActivité.textContent);
-        Total.value = parseFloat(nuitAmount.textContent) + parseFloat(amountActivité.textContent);
-        priceA.value = parseFloat(activitiesPrice)* iForA;
-    })
-
-date.forEach(function(date){   
-    date.addEventListener('change', function(){
-        setTimeout(function(){console.log(date1.value)},100)
-        switch(date.name){
-            case "dateArrive":
-                let dateA = new Date(date.value)
-                console.log(dateA.toDateString())
-                if(dateA < NowDate){
-                    date.value = NowYear.toString() + "-" + NowMonth.toString().padStart('2',0) + "-" + NowDay.toString().padStart('2',0);
-                    console.log(dateA.toDateString())
-                }
-                break
-            case "dateDepart":
-                let dateD = new Date(date.value);
-                let dateDmonth = dateD.getMonth() +1;
-                let dateDday = dateD.getMonth();
-                let dateForm = dateD.getFullYear().toString() + "-" + dateDmonth.toString().padStart('2',0) + "-" + dateDday.toString().padStart('2',0) ;
-                setTimeout(function(){console.log(date.value)},100)
-                console.log("date Form" + dateForm)
-                if(date.value <= date1.value || dateD <= NowDate){
-                    date.value = date1.value;
-                    setTimeout(function(){
-                        let dateChange = new Date(date.value) 
-                        dateChange.setDate(dateChange.getDate() + 1)
-                        date.value = dateChange.toISOString().substr(0,10);
-                    },100)
-                }
-                break
+                lisSup.forEach(function(ls){
+                    ls.disabled = false;
+                    $('.label').css('color','black')
+                })
+            }, 50);
         }
     })
 })
-
+// FORM TAB
+form.forEach(function(Allform){
+    Allform.addEventListener('change', function(){
+       
+    })  
+})
 let pay = Total.textContent;
 let firstName = nom.textContent;
 let activitéPrix = $('.amountActivité').text();

@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function(){
     let amountActivité = document.querySelector('.amountActivité');
     let down2 = document.querySelector('.down2');
     let up2 = document.querySelector('.up2');
-    const lisSup = document.querySelector('#suplement');
+    const lisSup = document.querySelectorAll('#suplement');
     let familialeCount = document.querySelector('.familialeCount');
 
     NombrePersonnesActivité.disabled = true ;

@@ -113,7 +113,7 @@ $conn->close();
                     <input type="date" name="dateArrive" class="dateA col-11" id="date">
                   </label>
                  <label class="col-6 fw-bold" for="dateD">Date de départ : <br>
-                    <input type="date" name="dateDepart" class="dateD col-12" id="dateD">
+                    <input type="date" name="dateDepart" class="dateD col-12" id="date">
                 </label>
              </div>
             </div>
@@ -147,7 +147,9 @@ $conn->close();
         <br>
         <div class="mb-2 litSup">
             <h5 class="fw-bold">Tous les bungalow familiale sont prises : </h5>
-            <label id="label" for="suplement"><input type="checkbox" id="suplement" value="oui" class="me-1">Ajout d'un lit suplémentaire (6€/jour)</label>
+            <label id="label" class="label" for="suplement">
+                <input type="checkbox" id="suplement" value="oui" class="me-1 suplement">Ajout d'un lit suplémentaire (6€/jour)
+            </label>
         </div>
 
 
@@ -212,12 +214,8 @@ $conn->close();
             <h5>€</h5>
         </div>
         <div class="d-flex align-items-center mb-1">
-            <p class="mb-0 fw-bold">Nombre de personnes : </p>
-            <input class="ms-1 nbrAA" type="text" name="nbrAA" id="nbrAA" style="width: 4%;height: 3%;" value="">
-            <div class="d-flex ms-2">
-                <button  class="down2" type="button">🔽</button>
-                <button  class="ms-1 up2" type="button">🔼</button>
-            </div>
+            <p class="mb-0 fw-bold col-5">Nombre de personnes : </p>
+            <input class="ms-1 nbrAA nbrAADesktop col-7 text-white fw-bold radius-1 border-0" type="number" name="nbrAA" min="0" id="nbrAA" value="">
         </div>
         <div class="mt-2" style="display: flex;">
             <h5 class="fw-bold">Total :</h5>
